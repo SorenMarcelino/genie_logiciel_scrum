@@ -373,6 +373,7 @@ int main(int argc, char **argv)
 			//n'écrit pas tout avec la ligne dessous pour une raison obscure
 			//fwrite(strcat(auteur,"</auteur>\n\t"), 1, strlen(titre)+strlen("<\titre>"), xml); 
 			fwrite(auteur, 1, strlen(auteur), xml);
+			free(auteur);
 
 			strcpy(balise, "</auteur>");
 			fwrite(balise, 1, sizeof(balise)+1, xml);
@@ -386,7 +387,6 @@ int main(int argc, char **argv)
 
 			char* abstract = getAbstract(fichier);
 			fwrite(abstract, 1, strlen(abstract), xml);
-
 			free(abstract);
 
 			strcpy(balise, "</abstract>");
@@ -401,7 +401,6 @@ int main(int argc, char **argv)
 
 			char* intro = getIntroduction(fichier);
 			fwrite(abstract, 1, strlen(intro), xml);
-
 			free(intro);
 
 			strcpy(balise, "</introduction>");
@@ -419,7 +418,6 @@ int main(int argc, char **argv)
 
 			char* corps = getCorps(fichier, &zone);
 			fwrite(abstract, 1, strlen(corps), xml);
-
 			free(corps);
 
 			strcpy(balise, "</corps>");
@@ -437,7 +435,6 @@ int main(int argc, char **argv)
 
 					char* conclu = getConclusion(fichier, &zone);
 					fwrite(abstract, 1, strlen(conclu), xml);
-
 					free(conclu);
 
 					strcpy(balise, "</conclusion>");
@@ -454,6 +451,7 @@ int main(int argc, char **argv)
 
 					char* discu = getDiscussion(fichier, &zone);
 					fwrite(abstract, 1, strlen(discu), xml);
+					free(discu);
 
 					strcpy(balise, "</discussion>");
 					fwrite(balise, 1, sizeof(balise)+5, xml);
@@ -469,6 +467,7 @@ int main(int argc, char **argv)
 
 			char* biblio = getReferences(fichier);
 			fwrite(biblio, 1, strlen(biblio), xml);
+			free(biblio);
 
 			strcpy(balise, "</biblio>");
 			fwrite(balise, 1, sizeof(balise)+1, xml);
